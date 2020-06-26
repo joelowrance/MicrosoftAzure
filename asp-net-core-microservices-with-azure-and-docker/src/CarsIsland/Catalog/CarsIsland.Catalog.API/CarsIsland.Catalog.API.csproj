@@ -12,7 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CarsIsland.Catalog.Domain\CarsIsland.Catalog.Domain.csproj" />
+    <ProjectReference Include="..\CarsIsland.Catalog.Infrastructure\CarsIsland.Catalog.Infrastructure.csproj" />
   </ItemGroup>
 
 

@@ -21,15 +21,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{94092E3F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5F3643CC-56B3-4998-88F6-C0FC12472660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Identity.API", "Identity\CarsIsland.Identity.API\CarsIsland.Identity.API.csproj", "{56F40AA5-7741-4428-8B1D-029063147BF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.Identity.API", "Identity\CarsIsland.Identity.API\CarsIsland.Identity.API.csproj", "{56F40AA5-7741-4428-8B1D-029063147BF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Payment.API", "Payment\CarsIsland.Payment.API\CarsIsland.Payment.API.csproj", "{074BC49C-04EE-45AD-BDC3-980A3451C3DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.Payment.API", "Payment\CarsIsland.Payment.API\CarsIsland.Payment.API.csproj", "{074BC49C-04EE-45AD-BDC3-980A3451C3DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Reservation.API", "Reservation\CarsIsland.Reservation.API\CarsIsland.Reservation.API.csproj", "{72ED7B03-0499-4815-8474-A262CCA1DA0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.Reservation.API", "Reservation\CarsIsland.Reservation.API\CarsIsland.Reservation.API.csproj", "{72ED7B03-0499-4815-8474-A262CCA1DA0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Reservation.Domain", "CarsIsland.Reservation.Domain\CarsIsland.Reservation.Domain.csproj", "{D76C43D3-069C-45F9-A997-5DBDAE4676E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.Catalog.Infrastructure", "Catalog\CarsIsland.Catalog.Infrastructure\CarsIsland.Catalog.Infrastructure.csproj", "{F2B068C6-2EE6-4CD0-B765-59F51B649944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Reservation.Infrastructure", "CarsIsland.Reservation.Infrastructure\CarsIsland.Reservation.Infrastructure.csproj", "{6B4BB991-0C62-4212-8A7B-4DD03AC420A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.Catalog.Domain", "Catalog\CarsIsland.Catalog.Domain\CarsIsland.Catalog.Domain.csproj", "{BD370C33-554E-4482-AF66-050BA4F32E7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,14 +53,14 @@ Global
 		{72ED7B03-0499-4815-8474-A262CCA1DA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72ED7B03-0499-4815-8474-A262CCA1DA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72ED7B03-0499-4815-8474-A262CCA1DA0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D76C43D3-069C-45F9-A997-5DBDAE4676E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D76C43D3-069C-45F9-A997-5DBDAE4676E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D76C43D3-069C-45F9-A997-5DBDAE4676E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D76C43D3-069C-45F9-A997-5DBDAE4676E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B4BB991-0C62-4212-8A7B-4DD03AC420A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B4BB991-0C62-4212-8A7B-4DD03AC420A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B4BB991-0C62-4212-8A7B-4DD03AC420A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B4BB991-0C62-4212-8A7B-4DD03AC420A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2B068C6-2EE6-4CD0-B765-59F51B649944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2B068C6-2EE6-4CD0-B765-59F51B649944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2B068C6-2EE6-4CD0-B765-59F51B649944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2B068C6-2EE6-4CD0-B765-59F51B649944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD370C33-554E-4482-AF66-050BA4F32E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD370C33-554E-4482-AF66-050BA4F32E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD370C33-554E-4482-AF66-050BA4F32E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD370C33-554E-4482-AF66-050BA4F32E7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,8 +74,8 @@ Global
 		{56F40AA5-7741-4428-8B1D-029063147BF4} = {1A82C038-AF34-4223-9868-BE2DACB2391B}
 		{074BC49C-04EE-45AD-BDC3-980A3451C3DF} = {7E7BBE03-DB94-46D8-9C27-0E6EBCEE09AB}
 		{72ED7B03-0499-4815-8474-A262CCA1DA0A} = {96FEB56C-545C-43F8-A0F5-0945B13B3CD8}
-		{D76C43D3-069C-45F9-A997-5DBDAE4676E8} = {96FEB56C-545C-43F8-A0F5-0945B13B3CD8}
-		{6B4BB991-0C62-4212-8A7B-4DD03AC420A8} = {96FEB56C-545C-43F8-A0F5-0945B13B3CD8}
+		{F2B068C6-2EE6-4CD0-B765-59F51B649944} = {BF691052-42D5-45D2-966C-B5E7323A42EF}
+		{BD370C33-554E-4482-AF66-050BA4F32E7F} = {BF691052-42D5-45D2-966C-B5E7323A42EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9A4F78E-6863-4AAD-BB75-30F2F16E1BED}
