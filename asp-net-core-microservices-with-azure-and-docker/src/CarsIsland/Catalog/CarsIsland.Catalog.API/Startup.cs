@@ -1,5 +1,6 @@
 using CarsIsland.Catalog.API.Core.DependencyInjection;
 using CarsIsland.Catalog.API.Infrastructure.Filters;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,10 +23,11 @@ namespace CarsIsland.Catalog.API
         {
             services.AddDataService();
             services.AddSwagger();
+            services.AddModelValidators();
             services.AddControllers(configure =>
             {
                 configure.Filters.Add(typeof(HttpGlobalExceptionFilter));
-            });
+            }).AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

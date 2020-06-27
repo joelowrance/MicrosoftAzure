@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CarsIsland.Catalog.Domain.Services.Interfaces
+namespace CarsIsland.Catalog.Domain.Repositories.Interfaces
 {
     public interface ICarsCatalogRepository
     {
@@ -11,6 +11,6 @@ namespace CarsIsland.Catalog.Domain.Services.Interfaces
         Task<IReadOnlyList<Car>> ListAllAsync();
         Task<Car> AddAsync(Car car);
         Task UpdateAsync(Car car);
-        Task DeleteAsync(Car car);
+        Task DeleteAsync(Guid id);
     }
 }

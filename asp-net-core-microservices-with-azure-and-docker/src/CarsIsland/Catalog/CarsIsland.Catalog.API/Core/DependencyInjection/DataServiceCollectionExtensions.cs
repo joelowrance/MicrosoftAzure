@@ -1,4 +1,6 @@
-﻿using CarsIsland.Catalog.Infrastructure.Configuration.Interfaces;
+﻿using CarsIsland.Catalog.Domain.Repositories.Interfaces;
+using CarsIsland.Catalog.Infrastructure.Configuration.Interfaces;
+using CarsIsland.Catalog.Infrastructure.Repositories;
 using CarsIsland.Catalog.Infrastructure.Services.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,8 @@ namespace CarsIsland.Catalog.API.Core.DependencyInjection
 
             services.AddDbContext<CarCatalogDbContext>(c =>
                c.UseSqlServer(sqlDbConfiguration.ConnectionString));
+
+            services.AddScoped<ICarsCatalogRepository, CarsCatalogRepository>();
 
             return services;
         }
