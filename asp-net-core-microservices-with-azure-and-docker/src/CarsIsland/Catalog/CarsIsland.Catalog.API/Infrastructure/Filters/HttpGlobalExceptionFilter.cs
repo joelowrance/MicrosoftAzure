@@ -1,5 +1,4 @@
-﻿using CarsIsland.Catalog.API.Infrastructure.Exceptions;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
@@ -21,11 +20,6 @@ namespace CarsIsland.Catalog.API.Infrastructure.Filters
             _logger.LogError(new EventId(context.Exception.HResult),
                context.Exception,
                context.Exception.Message);
-
-            if (context.Exception.GetType() == typeof(CarsCatalogDomainException))
-            {
-
-            }
         }
     }
 }

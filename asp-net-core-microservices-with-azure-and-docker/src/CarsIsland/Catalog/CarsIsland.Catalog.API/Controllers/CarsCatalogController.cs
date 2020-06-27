@@ -1,8 +1,9 @@
 ﻿using CarsIsland.Catalog.Domain.Model;
 using CarsIsland.Catalog.Domain.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace CarsIsland.Catalog.API.Controllers
@@ -12,30 +13,73 @@ namespace CarsIsland.Catalog.API.Controllers
     public class CarsCatalogController : ControllerBase
     {
         private readonly ICarsCatalogRepository _carsCatalogRepository;
-        private readonly ILogger<CarsCatalogController> _logger;
 
-        public CarsCatalogController(ICarsCatalogRepository carsCatalogRepository, ILogger<CarsCatalogController> logger)
+        public CarsCatalogController(ICarsCatalogRepository carsCatalogRepository)
         {
             _carsCatalogRepository = carsCatalogRepository;
-            _logger = logger;
         }
 
         /// <summary>
-        /// Gets list with available cars
+        /// Gets list with available cars in the catalog
         /// </summary>
-        /// <returns>
-        /// List with available cars
-        /// </returns> 
-        /// <response code="200">List with cars</response>
-        /// <response code="401">Access denied</response>
-        /// <response code="404">Cars catalog found</response>
-        /// <response code="500">Oops! something went wrong</response>
-        [ProducesResponseType(typeof(IReadOnlyList<Car>), 200)]
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAllProducts()
+        [ProducesResponseType(typeof(IReadOnlyList<Car>), (int)HttpStatusCode.OK)]
+        [HttpGet]
+        public async Task<IActionResult> GetAllCarsAsync()
         {
             var cars = await _carsCatalogRepository.ListAllAsync();
             return Ok(cars);
+        }
+
+        /// <summary>
+        /// Gets car from the catalog
+        /// </summary>
+        [ProducesResponseType(typeof(Car), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCarAsync(Guid id)
+        {
+            var car = await _carsCatalogRepository.GetByIdAsync(id);
+            if (car == null)
+            {
+                return NotFound(new { Message = $"Car with id {id} not found." });
+            }
+            return Ok(car);
+        }
+
+        /// <summary>
+        /// Add new car to the catalog
+        /// </summary>
+        [ProducesResponseType(typeof(Car), (int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [HttpPost]
+        public async Task<IActionResult> AddCarAsync([FromBody] Car car)
+        {
+            var addedCar = await _carsCatalogRepository.AddAsync(car);
+            return CreatedAtAction(nameof(GetCarAsync), new { id = addedCar.Id });
+        }
+
+
+        /// <summary>
+        /// Update existing car in the catalog
+        /// </summary>
+        [HttpPut]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<ActionResult> UpdateCarAsync([FromBody] Car carToUpdate)
+        {
+            var existingCarFromTheCatalog = await _carsCatalogRepository.GetByIdAsync(carToUpdate.Id);
+
+            if (existingCarFromTheCatalog == null)
+            {
+                return NotFound(new { Message = $"Car with id {carToUpdate.Id} not found." });
+            }
+
+            else
+            {
+                existingCarFromTheCatalog = carToUpdate;
+                await _carsCatalogRepository.UpdateAsync(existingCarFromTheCatalog);
+                return NoContent();
+            }
         }
     }
 }

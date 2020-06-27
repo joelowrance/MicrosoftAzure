@@ -42,8 +42,8 @@ namespace CarsIsland.Catalog.Infrastructure.Repositories
             try
             {
                 var car = await _sqlDbContext.Cars
-                                                       .Where(e => e.Id == id)
-                                                       .FirstOrDefaultAsync();
+                                 .Where(e => e.Id == id)
+                                 .FirstOrDefaultAsync();
                 if (car != null)
                 {
                     _sqlDbContext.Cars.Remove(car);
@@ -62,8 +62,9 @@ namespace CarsIsland.Catalog.Infrastructure.Repositories
             try
             {
                 var entityResult = await _sqlDbContext.Cars
-                    .Where(e => e.Id == id)
-                    .FirstOrDefaultAsync();
+                                        .AsNoTracking()
+                                        .Where(e => e.Id == id)
+                                        .FirstOrDefaultAsync();
                 return entityResult;
             }
             catch (DbUpdateException ex)
@@ -78,8 +79,9 @@ namespace CarsIsland.Catalog.Infrastructure.Repositories
             try
             {
                 var existingCar = await _sqlDbContext.Cars
-                   .Where(e => e.Id == car.Id)
-                   .FirstOrDefaultAsync();
+                                       .AsNoTracking()
+                                       .Where(e => e.Id == car.Id)
+                                       .FirstOrDefaultAsync();
 
                 if (existingCar.Id == car.Id)
                 {
@@ -99,7 +101,7 @@ namespace CarsIsland.Catalog.Infrastructure.Repositories
             try
             {
                 var cars = await _sqlDbContext.Cars
-                                     .ToListAsync();
+                                 .ToListAsync();
                 return cars;
             }
             catch (DbUpdateException ex)
