@@ -61,11 +61,10 @@ namespace CarsIsland.Catalog.Infrastructure.Repositories
         {
             try
             {
-                var entityResult = await _sqlDbContext.Cars
-                                        .AsNoTracking()
+                var car = await _sqlDbContext.Cars
                                         .Where(e => e.Id == id)
                                         .FirstOrDefaultAsync();
-                return entityResult;
+                return car;
             }
             catch (DbUpdateException ex)
             {
@@ -79,7 +78,6 @@ namespace CarsIsland.Catalog.Infrastructure.Repositories
             try
             {
                 var existingCar = await _sqlDbContext.Cars
-                                       .AsNoTracking()
                                        .Where(e => e.Id == car.Id)
                                        .FirstOrDefaultAsync();
 
