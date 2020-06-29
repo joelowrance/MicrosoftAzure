@@ -12,7 +12,6 @@ namespace CarsIsland.Catalog.API.Core.DependencyInjection
         public static IServiceCollection AddDataService(this IServiceCollection services)
         {
             var serviceProvider = services.BuildServiceProvider();
-
             var sqlDbConfiguration = serviceProvider.GetRequiredService<ISqlDbDataServiceConfiguration>();
 
             services.AddDbContext<CarCatalogDbContext>(c =>

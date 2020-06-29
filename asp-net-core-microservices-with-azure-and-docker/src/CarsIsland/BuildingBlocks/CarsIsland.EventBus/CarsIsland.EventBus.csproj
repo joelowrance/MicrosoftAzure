@@ -5,14 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.0.0-preview.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.5" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CarsIsland.Reservation.Domain\CarsIsland.Reservation.Domain.csproj" />
   </ItemGroup>
 
 </Project>
