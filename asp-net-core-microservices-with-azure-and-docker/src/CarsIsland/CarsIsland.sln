@@ -37,15 +37,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rent", "Rent", "{35CCC17F-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A941F15E-E0C4-4778-B971-8DA796D8BD28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Rent.API", "Rent\CarsIsland.Rent.API\CarsIsland.Rent.API.csproj", "{95F05219-30EB-42F3-BFF4-2007358B4FDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.Rent.API", "Rent\CarsIsland.Rent.API\CarsIsland.Rent.API.csproj", "{95F05219-30EB-42F3-BFF4-2007358B4FDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Rent.Domain", "Rent\CarsIsland.Rent.Domain\CarsIsland.Rent.Domain.csproj", "{5D8969EA-E7DA-488B-A101-909D78CE2F11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.Rent.Domain", "Rent\CarsIsland.Rent.Domain\CarsIsland.Rent.Domain.csproj", "{5D8969EA-E7DA-488B-A101-909D78CE2F11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Rent.Infrastructure", "Rent\CarsIsland.Rent.Infrastructure\CarsIsland.Rent.Infrastructure.csproj", "{CBAE5A85-457A-42AB-BFF9-7F4DCA230BB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.Rent.Infrastructure", "Rent\CarsIsland.Rent.Infrastructure\CarsIsland.Rent.Infrastructure.csproj", "{CBAE5A85-457A-42AB-BFF9-7F4DCA230BB7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{BC3597C9-DE56-4F38-8E20-66B334510A01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.EventBus", "BuildingBlocks\CarsIsland.EventBus\CarsIsland.EventBus.csproj", "{DBD58192-815F-498A-BE9D-8EA775186E5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.EventBus", "BuildingBlocks\CarsIsland.EventBus\CarsIsland.EventBus.csproj", "{DBD58192-815F-498A-BE9D-8EA775186E5C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{DA64FBB4-079B-461F-9074-001485523A47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{DBD58192-815F-498A-BE9D-8EA775186E5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBD58192-815F-498A-BE9D-8EA775186E5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBD58192-815F-498A-BE9D-8EA775186E5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA64FBB4-079B-461F-9074-001485523A47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA64FBB4-079B-461F-9074-001485523A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA64FBB4-079B-461F-9074-001485523A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA64FBB4-079B-461F-9074-001485523A47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

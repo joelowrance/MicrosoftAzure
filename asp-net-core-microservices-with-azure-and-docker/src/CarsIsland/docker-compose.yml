@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  carsisland.catalog.api:
+    image: ${DOCKER_REGISTRY-}carsislandcatalogapi
+    build:
+      context: .
+      dockerfile: Catalog/CarsIsland.Catalog.API/Dockerfile

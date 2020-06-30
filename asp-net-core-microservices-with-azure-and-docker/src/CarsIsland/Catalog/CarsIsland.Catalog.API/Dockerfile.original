@@ -8,8 +8,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Catalog/CarsIsland.Catalog.API/CarsIsland.Catalog.API.csproj", "Catalog/CarsIsland.Catalog.API/"]
-COPY ["Catalog/CarsIsland.Catalog.Domain/CarsIsland.Catalog.Domain.csproj", "Catalog/CarsIsland.Catalog.Domain/"]
-COPY ["Catalog/CarsIsland.Catalog.Infrastructure/CarsIsland.Catalog.Infrastructure.csproj", "Catalog/CarsIsland.Catalog.Infrastructure/"]
 RUN dotnet restore "Catalog/CarsIsland.Catalog.API/CarsIsland.Catalog.API.csproj"
 COPY . .
 WORKDIR "/src/Catalog/CarsIsland.Catalog.API"
