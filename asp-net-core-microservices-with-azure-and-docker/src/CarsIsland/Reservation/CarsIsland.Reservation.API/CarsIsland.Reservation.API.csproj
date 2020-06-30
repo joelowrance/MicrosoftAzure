@@ -17,9 +17,5 @@
     <ProjectReference Include="..\CarsIsland.Reservation.Infrastructure\CarsIsland.Reservation.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Core\IntegrationEvents\Events\" />
-  </ItemGroup>
-
 
 </Project>
