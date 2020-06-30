@@ -79,8 +79,6 @@ namespace CarsIsland.Catalog.API.Controllers
                 existingCarFromTheCatalog.Brand = carToUpdate.Brand;
                 existingCarFromTheCatalog.Model = carToUpdate.Model;
                 existingCarFromTheCatalog.PricePerDay = carToUpdate.PricePerDay;
-                existingCarFromTheCatalog.PricePerWeek = carToUpdate.PricePerWeek;
-                existingCarFromTheCatalog.PricePerMonth = carToUpdate.PricePerMonth;
 
                 await _carsCatalogRepository.UpdateAsync(existingCarFromTheCatalog);
                 return NoContent();

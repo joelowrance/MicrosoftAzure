@@ -1,4 +1,4 @@
-﻿namespace CarsIsland.Reservation.Domain.Common
+﻿namespace CarsIsland.Rent.Domain.Common
 {
     public interface IAggregateRoot
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CarsIsland.Reservation.Domain.Common
+namespace CarsIsland.Rent.Domain.Common
 {
     public abstract class Entity
     {

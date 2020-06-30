@@ -11,5 +11,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\IntegrationEvents\EventHandlers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\CarsIsland.EventBus\CarsIsland.EventBus.csproj" />
+  </ItemGroup>
+
 
 </Project>

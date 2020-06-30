@@ -9,9 +9,7 @@ namespace CarsIsland.Catalog.API.Infrastructure.Validators
         {
             RuleFor(x => x.Brand).NotNull().NotEmpty();
             RuleFor(x => x.Model).NotNull().NotEmpty();
-            RuleFor(x => x.PricePerDay).InclusiveBetween(200, 25000);
-            RuleFor(x => x.PricePerWeek).InclusiveBetween(200, 25000);
-            RuleFor(x => x.PricePerMonth).InclusiveBetween(200, 25000);
+            RuleFor(x => x.PricePerDay).InclusiveBetween(50, 25000);
         }
     }
 }

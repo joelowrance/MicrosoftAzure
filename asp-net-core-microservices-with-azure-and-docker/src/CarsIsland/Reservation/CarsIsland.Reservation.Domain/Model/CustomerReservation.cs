@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace CarsIsland.Reservation.Domain.Model
 {
     public class CustomerReservation
     {
         public Guid CustomerId { get; set; }
-        public List<Car> Cars { get; set; }
+        public ReservedCar Car { get; set; }
+        public DateTime RentFrom { get; set; }
+        public DateTime RentTo { get; set; }
+        public decimal Price => Car.RentForPeriodInDays * Car.PricePerDay;
 
-        public CustomerReservation(Guid customerId)
+        public CustomerReservation(Guid customerId, ReservedCar car)
         {
             CustomerId = customerId;
-            Cars = new List<Car>();
+            Car = car;
         }
     }
 }
