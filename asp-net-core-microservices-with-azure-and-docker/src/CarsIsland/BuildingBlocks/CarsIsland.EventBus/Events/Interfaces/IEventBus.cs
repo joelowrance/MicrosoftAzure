@@ -1,14 +1,16 @@
-﻿namespace CarsIsland.EventBus.Events.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace CarsIsland.EventBus.Events.Interfaces
 {
     public interface IEventBus
     {
-        void Publish(IntegrationEvent @event);
+        Task Publish(IntegrationEvent @event);
 
-        void Subscribe<T, TH>()
+        Task Subscribe<T, TH>()
             where T : IntegrationEvent
             where TH : IIntegrationEventHandler<T>;
 
-        void Unsubscribe<T, TH>()
+        Task Unsubscribe<T, TH>()
             where TH : IIntegrationEventHandler<T>
             where T : IntegrationEvent;
     }

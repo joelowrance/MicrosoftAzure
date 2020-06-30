@@ -2,7 +2,7 @@
 
 namespace CarsIsland.Reservation.API.Services.Interfaces
 {
-    interface IIdentityService
+    internal interface IIdentityService
     {
         Guid GetUserIdentity();
     }

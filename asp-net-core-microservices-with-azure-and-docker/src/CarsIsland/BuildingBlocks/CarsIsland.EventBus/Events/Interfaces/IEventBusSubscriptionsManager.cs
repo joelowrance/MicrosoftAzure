@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CarsIsland.EventBus.Events.Interfaces
 {
-    interface IEventBusSubscriptionsManager
+    public interface IEventBusSubscriptionsManager
     {
         bool IsEmpty { get; }
 
