@@ -1,6 +1,4 @@
-﻿using CarsIsland.EventBus.Events;
-
-namespace CarsIsland.EventBus.Abstractions
+﻿namespace CarsIsland.EventBus.Events.Interfaces
 {
     public interface IEventBus
     {

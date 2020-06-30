@@ -1,19 +1,27 @@
-﻿using CarsIsland.EventBus.Abstractions;
-using CarsIsland.EventBus.Events;
+﻿using CarsIsland.EventBus.Events;
+using CarsIsland.EventBus.Events.Interfaces;
 using CarsIsland.EventBus.Services.Interfaces;
+using Microsoft.Azure.ServiceBus;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace CarsIsland.EventBus
 {
     public class EventBus : IEventBus
     {
-        private readonly IEventReceiverService _eventReceiverService;
-        private readonly IEventSenderService _eventSenderService;
+        private readonly SubscriptionClient _subscriptionClient;
+        private readonly IServiceBusConnectionManagementService _serviceBusConnectionManagementService;
+        private readonly ILogger<EventBus> _logger;
+        private const string INTEGRATION_EVENT_SUFFIX = "IntegrationEvent";
 
-        public EventBus(IEventReceiverService eventReceiverService, IEventSenderService eventSenderService)
+        public EventBus(IServiceBusConnectionManagementService serviceBusConnectionManagementService,
+                                     ILogger<EventBus> logger,
+                                     string subscriptionClientName)
         {
-            _eventReceiverService = eventReceiverService;
-            _eventSenderService = eventSenderService;
+            _serviceBusConnectionManagementService = serviceBusConnectionManagementService;
+            _subscriptionClient = _subscriptionClient = new SubscriptionClient(_serviceBusConnectionManagementService.ServiceBusConnectionStringBuilder,
+                subscriptionClientName);
+            _logger = logger;
         }
 
         public void Publish(IntegrationEvent @event)
