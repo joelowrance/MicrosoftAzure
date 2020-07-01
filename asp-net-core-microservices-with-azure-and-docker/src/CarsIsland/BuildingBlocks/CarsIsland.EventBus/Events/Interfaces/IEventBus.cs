@@ -13,5 +13,7 @@ namespace CarsIsland.EventBus.Events.Interfaces
         Task Unsubscribe<T, TH>()
             where TH : IIntegrationEventHandler<T>
             where T : IntegrationEvent;
+
+        Task Setup();
     }
 }

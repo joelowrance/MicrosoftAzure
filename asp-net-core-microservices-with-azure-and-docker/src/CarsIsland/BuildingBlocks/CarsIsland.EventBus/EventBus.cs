@@ -16,7 +16,6 @@ namespace CarsIsland.EventBus
         private readonly IEventBusSubscriptionsManager _subscriptionManager;
         private readonly IServiceBusConnectionManagementService _serviceBusConnectionManagementService;
         private readonly ILogger<EventBus> _logger;
-        private const string INTEGRATION_EVENT_SUFFIX = "IntegrationEvent";
 
         public EventBus(IServiceBusConnectionManagementService serviceBusConnectionManagementService,
                         IEventBusSubscriptionsManager subscriptionManager,
@@ -30,9 +29,23 @@ namespace CarsIsland.EventBus
             _logger = logger;
         }
 
+        public async Task Setup()
+        {
+            try
+            {
+                await _subscriptionClient.RemoveRuleAsync(RuleDescription.DefaultRuleName);
+                RegisterSubscriptionClientMessageHandler();
+            }
+
+            catch (MessagingEntityNotFoundException)
+            {
+                _logger.LogWarning("The messaging entity {DefaultRuleName} Could not be found.", RuleDescription.DefaultRuleName);
+            }
+        }
+
         public async Task Publish(IntegrationEvent @event)
         {
-            var eventName = @event.GetType().Name.Replace(INTEGRATION_EVENT_SUFFIX, "");
+            var eventName = @event.GetType().Name;
             var jsonMessage = JsonConvert.SerializeObject(@event);
             var body = Encoding.UTF8.GetBytes(jsonMessage);
 
@@ -51,7 +64,7 @@ namespace CarsIsland.EventBus
             where T : IntegrationEvent
             where TH : IIntegrationEventHandler<T>
         {
-            var eventName = typeof(T).Name.Replace(INTEGRATION_EVENT_SUFFIX, "");
+            var eventName = typeof(T).Name;
 
             var containsKey = _subscriptionManager.HasSubscriptionsForEvent<T>();
             if (!containsKey)
@@ -78,7 +91,7 @@ namespace CarsIsland.EventBus
             where T : IntegrationEvent
             where TH : IIntegrationEventHandler<T>
         {
-            var eventName = typeof(T).Name.Replace(INTEGRATION_EVENT_SUFFIX, "");
+            var eventName = typeof(T).Name;
 
             try
             {
@@ -91,6 +104,47 @@ namespace CarsIsland.EventBus
 
             _logger.LogInformation("Unsubscribing from event '{EventName}'", eventName);
             _subscriptionManager.RemoveSubscription<T, TH>();
+        }
+
+        private void RegisterSubscriptionClientMessageHandler()
+        {
+            _subscriptionClient.RegisterMessageHandler(
+                async (message, token) =>
+                {
+                    var eventName = message.Label;
+                    var messageData = Encoding.UTF8.GetString(message.Body);
+
+                    if (await ProcessEvent(eventName, messageData))
+                    {
+                        await _subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
+                    }
+                },
+                new MessageHandlerOptions(ExceptionReceivedHandler) { MaxConcurrentCalls = 10, AutoComplete = false });
+        }
+
+        private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
+        {
+            var ex = exceptionReceivedEventArgs.Exception;
+            var context = exceptionReceivedEventArgs.ExceptionReceivedContext;
+
+            _logger.LogError(ex, "ERROR handling message: '{ExceptionMessage}' - Context: '{ExceptionContext}'", ex.Message, context);
+
+            return Task.CompletedTask;
+        }
+
+        private async Task<bool> ProcessEvent(string eventName, string message)
+        {
+            var processed = false;
+            if (_subscriptionManager.HasSubscriptionsForEvent(eventName))
+            {
+                var eventType = _subscriptionManager.GetEventTypeByName(eventName);
+                var integrationEvent = JsonConvert.DeserializeObject(message, eventType);
+                var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
+                await (Task)concreteType.GetMethod("Handle").Invoke(null, new object[] { integrationEvent });
+                processed = true;
+            }
+
+            return processed;
         }
     }
 }
