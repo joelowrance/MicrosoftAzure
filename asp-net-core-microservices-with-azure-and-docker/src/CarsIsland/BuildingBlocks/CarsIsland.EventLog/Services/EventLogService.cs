@@ -15,17 +15,16 @@ namespace CarsIsland.EventLog.Services
 {
     public class EventLogService : IEventLogService
     {
-        private readonly IntegrationEventLogContext _integrationEventLogContext;
+        private readonly EventLogContext _integrationEventLogContext;
         private readonly DbConnection _dbConnection;
         private readonly List<Type> _eventTypes;
 
         public EventLogService(DbConnection dbConnection)
         {
             _dbConnection = dbConnection ?? throw new ArgumentNullException(nameof(dbConnection));
-            _integrationEventLogContext = new IntegrationEventLogContext(
-                new DbContextOptionsBuilder<IntegrationEventLogContext>()
-                    .UseSqlServer(_dbConnection)
-                    .Options);
+            _integrationEventLogContext = new EventLogContext(
+                new DbContextOptionsBuilder<EventLogContext>()
+                    .UseSqlServer(_dbConnection).Options);
 
             _eventTypes = Assembly.Load(Assembly.GetEntryAssembly().FullName)
                 .GetTypes()

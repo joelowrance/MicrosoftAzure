@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace CarsIsland.Catalog.Infrastructure.Services.Data
+namespace CarsIsland.Catalog.Infrastructure.Repositories
 {
     public class CarCatalogDbContext : DbContext
     {

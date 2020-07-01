@@ -29,7 +29,7 @@ namespace CarsIsland.EventBus
             _logger = logger;
         }
 
-        public async Task Setup()
+        public async Task SetupAsync()
         {
             try
             {
@@ -43,7 +43,7 @@ namespace CarsIsland.EventBus
             }
         }
 
-        public async Task Publish(IntegrationEvent @event)
+        public async Task PublishAsync(IntegrationEvent @event)
         {
             var eventName = @event.GetType().Name;
             var jsonMessage = JsonConvert.SerializeObject(@event);
@@ -60,7 +60,7 @@ namespace CarsIsland.EventBus
             await topicClient.SendAsync(message);
         }
 
-        public async Task Subscribe<T, TH>()
+        public async Task SubscribeAsync<T, TH>()
             where T : IntegrationEvent
             where TH : IIntegrationEventHandler<T>
         {
@@ -87,7 +87,7 @@ namespace CarsIsland.EventBus
             _subscriptionManager.AddSubscription<T, TH>();
         }
 
-        public async Task Unsubscribe<T, TH>()
+        public async Task UnsubscribeAsync<T, TH>()
             where T : IntegrationEvent
             where TH : IIntegrationEventHandler<T>
         {

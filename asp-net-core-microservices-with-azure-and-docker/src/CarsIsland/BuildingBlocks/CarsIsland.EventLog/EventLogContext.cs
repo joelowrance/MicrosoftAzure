@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CarsIsland.EventLog
 {
-    public class IntegrationEventLogContext : DbContext
+    public class EventLogContext : DbContext
     {
-        public IntegrationEventLogContext(DbContextOptions<IntegrationEventLogContext> options) : base(options)
+        public EventLogContext(DbContextOptions<EventLogContext> options) : base(options)
         {
         }
 

@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.EventBus", "Buil
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{DA64FBB4-079B-461F-9074-001485523A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.EventLog", "BuildingBlocks\CarsIsland.EventLog\CarsIsland.EventLog.csproj", "{2A99833C-865A-40FC-BCCB-A60E8A23FF15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.EventLog", "BuildingBlocks\CarsIsland.EventLog\CarsIsland.EventLog.csproj", "{2A99833C-865A-40FC-BCCB-A60E8A23FF15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

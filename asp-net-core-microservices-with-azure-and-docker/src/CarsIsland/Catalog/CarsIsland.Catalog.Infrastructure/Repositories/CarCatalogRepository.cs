@@ -1,6 +1,5 @@
 ﻿using CarsIsland.Catalog.Domain.Model;
 using CarsIsland.Catalog.Domain.Repositories.Interfaces;
-using CarsIsland.Catalog.Infrastructure.Services.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace CarsIsland.Catalog.Infrastructure.Repositories
 {
-    public sealed class CarsCatalogRepository : ICarsCatalogRepository
+    public sealed class CarCatalogRepository : ICarsCatalogRepository
     {
         private readonly CarCatalogDbContext _sqlDbContext;
-        private readonly ILogger<CarsCatalogRepository> _logger;
+        private readonly ILogger<CarCatalogRepository> _logger;
 
-        public CarsCatalogRepository(CarCatalogDbContext sqlDbContext, ILogger<CarsCatalogRepository> logger)
+        public CarCatalogRepository(CarCatalogDbContext sqlDbContext, ILogger<CarCatalogRepository> logger)
         {
             _sqlDbContext = sqlDbContext;
             _logger = logger;
