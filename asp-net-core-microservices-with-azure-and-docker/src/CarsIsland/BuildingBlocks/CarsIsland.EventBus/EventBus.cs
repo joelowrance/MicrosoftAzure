@@ -39,7 +39,7 @@ namespace CarsIsland.EventBus
 
             catch (MessagingEntityNotFoundException)
             {
-                _logger.LogWarning("The messaging entity {DefaultRuleName} Could not be found.", RuleDescription.DefaultRuleName);
+                _logger.LogWarning("The messaging entity '{DefaultRuleName}' Could not be found.", RuleDescription.DefaultRuleName);
             }
         }
 
