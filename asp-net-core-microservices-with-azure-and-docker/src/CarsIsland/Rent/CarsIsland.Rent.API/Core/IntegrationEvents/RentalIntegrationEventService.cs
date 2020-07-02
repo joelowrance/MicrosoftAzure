@@ -32,7 +32,7 @@ namespace CarsIsland.Rent.API.Core.IntegrationEvents
 
         public async Task AddAndSaveEventAsync(IntegrationEvent @event)
         {
-            await _eventLogService.SaveEventAsync(@event, _rentDbContext.CurrentTransaction);
+            await _eventLogService.SaveEventAsync(@event, _rentDbContext.Database.CurrentTransaction);
         }
 
         public async Task PublishEventsThroughEventBusAsync(Guid transactionId)

@@ -10,7 +10,7 @@ namespace CarsIsland.EventLog
         private ResilientTransaction(DbContext context) =>
             _context = context ?? throw new ArgumentNullException(nameof(context));
 
-        public static ResilientTransaction New(DbContext context) =>
+        public static ResilientTransaction CreateNew(DbContext context) =>
             new ResilientTransaction(context);
 
         public async Task ExecuteAsync(Func<Task> action)
