@@ -1,5 +1,6 @@
 ﻿using CarsIsland.EventBus.Events;
 using CarsIsland.EventBus.Events.Interfaces;
+using CarsIsland.EventLog;
 using CarsIsland.EventLog.Services.Interfaces;
 using CarsIsland.Rent.API.Core.IntegrationEvents.Interfaces;
 using CarsIsland.Rent.Infrastructure.Repositories;
@@ -32,7 +33,11 @@ namespace CarsIsland.Rent.API.Core.IntegrationEvents
 
         public async Task AddAndSaveEventAsync(IntegrationEvent @event)
         {
-            await _eventLogService.SaveEventAsync(@event, _rentDbContext.Database.CurrentTransaction);
+            await ResilientTransaction.CreateNew(_rentDbContext).ExecuteAsync(async () =>
+            {
+                await _rentDbContext.SaveChangesAsync();
+                await _eventLogService.SaveEventAsync(@event, _rentDbContext.Database.CurrentTransaction);
+            });
         }
 
         public async Task PublishEventsThroughEventBusAsync(Guid transactionId)
