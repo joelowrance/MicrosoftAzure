@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CarsIsland.Rent.API.Core.IntegrationEvents
 {
-    public class RentalIntegrationEventService : IRentalIntegrationEventService
+    internal class RentalIntegrationEventService : IRentalIntegrationEventService
     {
         private readonly RentDbContext _rentDbContext;
         private readonly IEventBus _eventBus;

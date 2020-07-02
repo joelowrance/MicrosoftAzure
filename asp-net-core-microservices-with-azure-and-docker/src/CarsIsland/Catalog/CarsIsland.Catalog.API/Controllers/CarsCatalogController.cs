@@ -1,6 +1,9 @@
-﻿using CarsIsland.Catalog.Domain.Model;
-using CarsIsland.Catalog.Domain.Repositories.Interfaces;
+﻿using CarsIsland.Catalog.API.Core.IntegrationEvents.Events;
+using CarsIsland.Catalog.API.Core.IntegrationEvents.Interfaces;
+using CarsIsland.Catalog.Domain.Model;
+using CarsIsland.Catalog.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -12,11 +15,14 @@ namespace CarsIsland.Catalog.API.Controllers
     [Route("[controller]")]
     public class CarsCatalogController : ControllerBase
     {
-        private readonly ICarsCatalogRepository _carsCatalogRepository;
+        private readonly CarCatalogDbContext _carCatalogDbContext;
+        private readonly ICatalogIntegrationEventService _catalogIntegrationEventService;
 
-        public CarsCatalogController(ICarsCatalogRepository carsCatalogRepository)
+        public CarsCatalogController(CarCatalogDbContext carCatalogDbContext,
+                                     ICatalogIntegrationEventService catalogIntegrationEventService)
         {
-            _carsCatalogRepository = carsCatalogRepository;
+            _carCatalogDbContext = carCatalogDbContext;
+            _catalogIntegrationEventService = catalogIntegrationEventService;
         }
 
         /// <summary>
@@ -26,7 +32,7 @@ namespace CarsIsland.Catalog.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllCarsAsync()
         {
-            var cars = await _carsCatalogRepository.ListAllAsync();
+            var cars = await _carCatalogDbContext.Cars.ToListAsync();
             return Ok(cars);
         }
 
@@ -38,7 +44,7 @@ namespace CarsIsland.Catalog.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCarAsync(Guid id)
         {
-            var car = await _carsCatalogRepository.GetByIdAsync(id);
+            var car = await _carCatalogDbContext.Cars.SingleOrDefaultAsync(i => i.Id == id);
             if (car == null)
             {
                 return NotFound(new { Message = $"Car with id {id} not found." });
@@ -54,8 +60,9 @@ namespace CarsIsland.Catalog.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCarAsync([FromBody] Car car)
         {
-            var addedCar = await _carsCatalogRepository.AddAsync(car);
-            return CreatedAtAction(nameof(GetCarAsync), new { id = addedCar.Id });
+            var addedCar = _carCatalogDbContext.Add(car);
+            await _carCatalogDbContext.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetCarAsync), new { id = addedCar.Entity.Id });
         }
 
 
@@ -67,7 +74,7 @@ namespace CarsIsland.Catalog.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<ActionResult> UpdateCarAsync([FromBody] Car carToUpdate)
         {
-            var existingCarFromTheCatalog = await _carsCatalogRepository.GetByIdAsync(carToUpdate.Id);
+            var existingCarFromTheCatalog = await _carCatalogDbContext.Cars.SingleOrDefaultAsync(i => i.Id == carToUpdate.Id);
 
             if (existingCarFromTheCatalog == null)
             {
@@ -78,9 +85,27 @@ namespace CarsIsland.Catalog.API.Controllers
             {
                 existingCarFromTheCatalog.Brand = carToUpdate.Brand;
                 existingCarFromTheCatalog.Model = carToUpdate.Model;
+
+                var oldPricePerDay = existingCarFromTheCatalog.PricePerDay;
+                var hasPricePerDayChanged = existingCarFromTheCatalog.PricePerDay != carToUpdate.PricePerDay;
                 existingCarFromTheCatalog.PricePerDay = carToUpdate.PricePerDay;
 
-                await _carsCatalogRepository.UpdateAsync(existingCarFromTheCatalog);
+                _carCatalogDbContext.Cars.Update(existingCarFromTheCatalog);
+
+                if (hasPricePerDayChanged)
+                {
+                    var pricePerDayChangedEvent = new CarPricePerDayChangedIntegrationEvent(existingCarFromTheCatalog.Id,
+                                                                                            existingCarFromTheCatalog.PricePerDay,
+                                                                                            oldPricePerDay);
+
+                    await _catalogIntegrationEventService.AddAndSaveEventAsync(pricePerDayChangedEvent);
+                    await _catalogIntegrationEventService.PublishEventsThroughEventBusAsync(pricePerDayChangedEvent);
+                }
+
+                else
+                {
+                    await _carCatalogDbContext.SaveChangesAsync();
+                }
                 return NoContent();
             }
         }

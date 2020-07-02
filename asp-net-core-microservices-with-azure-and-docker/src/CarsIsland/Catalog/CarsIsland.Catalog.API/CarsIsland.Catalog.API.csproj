@@ -27,6 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\CarsIsland.EventBus\CarsIsland.EventBus.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\CarsIsland.EventLog\CarsIsland.EventLog.csproj" />
     <ProjectReference Include="..\CarsIsland.Catalog.Domain\CarsIsland.Catalog.Domain.csproj" />
     <ProjectReference Include="..\CarsIsland.Catalog.Infrastructure\CarsIsland.Catalog.Infrastructure.csproj" />
   </ItemGroup>

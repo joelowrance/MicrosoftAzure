@@ -9,8 +9,8 @@ namespace CarsIsland.Catalog.Domain.Repositories.Interfaces
     {
         Task<Car> GetByIdAsync(Guid id);
         Task<IReadOnlyList<Car>> ListAllAsync();
-        Task<Car> AddAsync(Car car);
-        Task UpdateAsync(Car car);
-        Task DeleteAsync(Guid id);
+        Car Add(Car car);
+        void Update(Car car);
+        void Delete(Car car);
     }
 }

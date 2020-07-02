@@ -20,92 +20,36 @@ namespace CarsIsland.Catalog.Infrastructure.Repositories
             _logger = logger;
         }
 
-        public async Task<Car> AddAsync(Car car)
+        public Car Add(Car car)
         {
-            try
-            {
-                car.Id = Guid.NewGuid();
-                var entityResult = _sqlDbContext.Cars.Add(car);
-                await _sqlDbContext.SaveChangesAsync();
-                return entityResult.Entity;
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"New entity with ID: {car.Id} was not added successfully - error details: {ex.Message}");
-                throw;
-            }
+            car.Id = Guid.NewGuid();
+            return _sqlDbContext.Cars.Add(car).Entity;
         }
 
-        public async Task DeleteAsync(Guid id)
+        public void Delete(Car car)
         {
-            try
-            {
-                var car = await _sqlDbContext.Cars
-                                 .Where(e => e.Id == id)
-                                 .FirstOrDefaultAsync();
-                if (car != null)
-                {
-                    _sqlDbContext.Cars.Remove(car);
-                    await _sqlDbContext.SaveChangesAsync();
-                }
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"Entity with ID: {id} was not removed successfully - error details: {ex.Message}");
-                throw;
-            }
+            _sqlDbContext.Cars.Remove(car);
         }
 
         public async Task<Car> GetByIdAsync(Guid id)
         {
-            try
-            {
-                var car = await _sqlDbContext.Cars
-                                        .Where(e => e.Id == id)
-                                        .FirstOrDefaultAsync();
-                return car;
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"Entity with ID: {id} was not retrieved successfully - error details: {ex.Message}");
-                throw;
-            }
+            var car = await _sqlDbContext.Cars
+                                    .Where(e => e.Id == id)
+                                    .FirstOrDefaultAsync();
+            return car;
+
         }
 
-        public async Task UpdateAsync(Car car)
+        public void Update(Car car)
         {
-            try
-            {
-                var existingCar = await _sqlDbContext.Cars
-                                       .Where(e => e.Id == car.Id)
-                                       .FirstOrDefaultAsync();
-
-                if (existingCar.Id == car.Id)
-                {
-                    _sqlDbContext.Cars.Update(car);
-                    await _sqlDbContext.SaveChangesAsync();
-                }
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"Entity with ID: {car.Id} was not updated successfully - error details: {ex.Message}");
-                throw;
-            }
+            _sqlDbContext.Update(_sqlDbContext);
         }
 
         public async Task<IReadOnlyList<Car>> ListAllAsync()
         {
-            try
-            {
-                var cars = await _sqlDbContext.Cars
-                                 .ToListAsync();
-                return cars;
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"Entities was not retrieved successfully - error details: {ex.Message}");
-                throw;
-            }
+            var cars = await _sqlDbContext.Cars
+                             .ToListAsync();
+            return cars;
         }
     }
 }
