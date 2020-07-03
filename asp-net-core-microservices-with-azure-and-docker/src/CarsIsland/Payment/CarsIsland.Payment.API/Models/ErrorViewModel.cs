@@ -1,5 +1,3 @@
-using System;
-
 namespace CarsIsland.Payment.API.Models
 {
     public class ErrorViewModel
