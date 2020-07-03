@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarsIsland.Reservation.API.Core.IntegrationEvents.Events
 {
-    public class CarRentalConfirmedAndPaidIntegrationEventHandler : IIntegrationEventHandler
+    public class CarRentalConfirmedAndPaidIntegrationEventHandler : IIntegrationEventHandler<CarRentalConfirmedAndPaidIntegrationEvent>
     {
         private readonly IReservationRepository _reservationRepository;
         private readonly ILogger<CarRentalConfirmedAndPaidIntegrationEventHandler> _logger;
@@ -21,7 +21,8 @@ namespace CarsIsland.Reservation.API.Core.IntegrationEvents.Events
 
         public async Task Handle(CarRentalConfirmedAndPaidIntegrationEvent @event)
         {
-            await _reservationRepository.DeleteReservationAsync(@event.UserId);
+            _logger.LogInformation("Handling integration event: {IntegrationEventId} - ({@IntegrationEvent})", @event.Id, @event);
+            await _reservationRepository.DeleteReservationAsync(@event.UserId.ToString());
         }
     }
 }
