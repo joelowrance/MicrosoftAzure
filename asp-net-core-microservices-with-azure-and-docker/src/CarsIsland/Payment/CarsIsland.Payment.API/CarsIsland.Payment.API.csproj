@@ -2,18 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>4d29994b-228f-4c9e-ab98-5ed17dde281a</UserSecretsId>
+    <UserSecretsId>e94e8ad7-4f07-498a-81ae-95e9b4767ad2</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Stripe.net" Version="37.15.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
+    <ProjectReference Include="..\CarsIsland.Payment.Domain\CarsIsland.Payment.Domain.csproj" />
+    <ProjectReference Include="..\CarsIsland.Payment.Infrastructure\CarsIsland.Payment.Infrastructure.csproj" />
   </ItemGroup>
-
 
 </Project>
