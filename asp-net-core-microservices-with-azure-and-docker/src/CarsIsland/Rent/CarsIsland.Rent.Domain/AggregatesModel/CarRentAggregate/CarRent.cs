@@ -10,7 +10,17 @@ namespace CarsIsland.Rent.Domain.AggregatesModel.CarRentAggregate
 
         private DateTime _rentFrom { get; set; }
         private DateTime _rentTo { get; set; }
+        private Guid _paymentId;
+        private CarRentStatus _carRentStatus;
 
-        public CarRentStatus CarRentStatus { get; private set; }
+        public void SetPaymentId(Guid id)
+        {
+            _paymentId = id;
+        }
+
+        public void SetCustomerId(Guid id)
+        {
+            _customerId = id;
+        }
     }
 }
