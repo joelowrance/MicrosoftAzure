@@ -33,6 +33,7 @@ namespace CarsIsland.EventBus
         {
             try
             {
+                await RemoveDefaultRuleAsync();
                 await _subscriptionClient.RemoveRuleAsync(RuleDescription.DefaultRuleName);
                 RegisterSubscriptionClientMessageHandler();
             }
@@ -145,6 +146,18 @@ namespace CarsIsland.EventBus
             }
 
             return processed;
+        }
+
+        private async Task RemoveDefaultRuleAsync()
+        {
+            try
+            {
+                await _subscriptionClient.RemoveRuleAsync(RuleDescription.DefaultRuleName);
+            }
+            catch (MessagingEntityNotFoundException)
+            {
+                _logger.LogWarning("The messaging entity '{DefaultRuleName}' Could not be found.", RuleDescription.DefaultRuleName);
+            }
         }
     }
 }
