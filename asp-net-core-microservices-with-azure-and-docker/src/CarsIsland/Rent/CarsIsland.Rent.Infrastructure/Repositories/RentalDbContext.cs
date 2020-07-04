@@ -2,9 +2,9 @@
 
 namespace CarsIsland.Rent.Infrastructure.Repositories
 {
-    public class RentDbContext : DbContext
+    public class RentalDbContext : DbContext
     {
-        public RentDbContext(DbContextOptions<RentDbContext> options)
+        public RentalDbContext(DbContextOptions<RentalDbContext> options)
                                                       : base(options)
         {
         }

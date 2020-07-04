@@ -14,13 +14,13 @@ namespace CarsIsland.Rent.API.Core.IntegrationEvents
 {
     internal class RentalIntegrationEventService : IRentalIntegrationEventService
     {
-        private readonly RentDbContext _rentDbContext;
+        private readonly RentalDbContext _rentDbContext;
         private readonly IEventBus _eventBus;
         private readonly IEventLogService _eventLogService;
         private readonly ILogger<RentalIntegrationEventService> _logger;
         private readonly Func<DbConnection, IEventLogService> _integrationEventLogServiceFactory;
 
-        public RentalIntegrationEventService(RentDbContext rentDbContext, Func<DbConnection, IEventLogService> integrationEventLogServiceFactory,
+        public RentalIntegrationEventService(RentalDbContext rentDbContext, Func<DbConnection, IEventLogService> integrationEventLogServiceFactory,
                                              IEventBus eventBus, IEventLogService eventLogService,
                                              ILogger<RentalIntegrationEventService> logger)
         {
