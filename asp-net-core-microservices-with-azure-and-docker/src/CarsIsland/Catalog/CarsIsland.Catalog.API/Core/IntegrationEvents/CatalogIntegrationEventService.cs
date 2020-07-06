@@ -21,7 +21,7 @@ namespace CarsIsland.Catalog.API.Core.IntegrationEvents
         private readonly Func<DbConnection, IEventLogService> _integrationEventLogServiceFactory;
 
         public CatalogIntegrationEventService(CarCatalogDbContext carCatalogDbContext, Func<DbConnection, IEventLogService> integrationEventLogServiceFactory,
-                                     IEventBus eventBus, IEventLogService eventLogService,
+                                     IEventBus eventBus,
                                      ILogger<CatalogIntegrationEventService> logger)
         {
             _carCatalogDbContext = carCatalogDbContext ?? throw new ArgumentNullException(nameof(carCatalogDbContext));
