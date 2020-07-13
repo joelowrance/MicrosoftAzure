@@ -8,7 +8,6 @@ using CarsIsland.EventBus.Services.Interfaces;
 using CarsIsland.EventLog.Services;
 using CarsIsland.EventLog.Services.Interfaces;
 using Microsoft.Azure.ServiceBus;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,8 +17,7 @@ namespace CarsIsland.Catalog.API.Core.DependencyInjection
 {
     public static class IntegrationServiceCollectionExtensions
     {
-        public static IServiceCollection AddIntegrationServices(this IServiceCollection services,
-                                                                IConfiguration configuration)
+        public static IServiceCollection AddIntegrationServices(this IServiceCollection services)
         {
             var serviceProvider = services.BuildServiceProvider();
             var azureServiceBusConfiguration = serviceProvider.GetRequiredService<IAzureServiceBusConfiguration>();

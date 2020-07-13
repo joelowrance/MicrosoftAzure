@@ -23,6 +23,7 @@ namespace CarsIsland.Catalog.API
         {
             services.AddAppConfiguration(Configuration);
             services.AddDataService();
+            services.AddIntegrationServices();
             services.AddSwagger();
             services.AddModelValidators();
             services.AddControllers(configure =>
