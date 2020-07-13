@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarsIsland.Catalog.Infrastructure.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class addcatalogdbinitialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,10 +27,10 @@ namespace CarsIsland.Catalog.Infrastructure.Migrations
                 columns: new[] { "Id", "AvailableForRent", "Brand", "Model", "PricePerDay" },
                 values: new object[,]
                 {
-                    { new Guid("44bdfdb4-604d-4ef3-b923-75bd240c630f"), true, "BMW", "320", 200m },
-                    { new Guid("fd6b2ec5-4751-49c1-a006-73d63cd6310a"), true, "Audi", "A1", 120m },
-                    { new Guid("21655889-d6bf-4d4a-86c9-faebc42da1a3"), true, "Mercedes", "E200", 250m },
-                    { new Guid("e5d54404-ea0f-47bc-8ed9-795ac9eb1114"), true, "Ford", "Focus", 90m }
+                    { new Guid("2605c956-1ab4-4ce9-ad90-559978d754dd"), true, "BMW", "320", 200m },
+                    { new Guid("8907d3d0-d16f-49e1-8ae6-570cd3d20c84"), true, "Audi", "A1", 120m },
+                    { new Guid("9d121cd4-28a9-4ccf-94fd-d04041c81988"), true, "Mercedes", "E200", 250m },
+                    { new Guid("e0ea016f-9c7a-4bc9-86e1-8fdae0b334f0"), true, "Ford", "Focus", 90m }
                 });
         }
 

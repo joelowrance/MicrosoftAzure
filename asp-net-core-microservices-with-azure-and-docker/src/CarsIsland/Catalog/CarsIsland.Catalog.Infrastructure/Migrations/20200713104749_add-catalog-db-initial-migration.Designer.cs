@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarsIsland.Catalog.Infrastructure.Migrations
 {
     [DbContext(typeof(CarCatalogDbContext))]
-    [Migration("20200713081931_initial-migration")]
-    partial class initialmigration
+    [Migration("20200713104749_add-catalog-db-initial-migration")]
+    partial class addcatalogdbinitialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,7 +46,7 @@ namespace CarsIsland.Catalog.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("44bdfdb4-604d-4ef3-b923-75bd240c630f"),
+                            Id = new Guid("2605c956-1ab4-4ce9-ad90-559978d754dd"),
                             AvailableForRent = true,
                             Brand = "BMW",
                             Model = "320",
@@ -54,7 +54,7 @@ namespace CarsIsland.Catalog.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fd6b2ec5-4751-49c1-a006-73d63cd6310a"),
+                            Id = new Guid("8907d3d0-d16f-49e1-8ae6-570cd3d20c84"),
                             AvailableForRent = true,
                             Brand = "Audi",
                             Model = "A1",
@@ -62,7 +62,7 @@ namespace CarsIsland.Catalog.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("21655889-d6bf-4d4a-86c9-faebc42da1a3"),
+                            Id = new Guid("9d121cd4-28a9-4ccf-94fd-d04041c81988"),
                             AvailableForRent = true,
                             Brand = "Mercedes",
                             Model = "E200",
@@ -70,7 +70,7 @@ namespace CarsIsland.Catalog.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e5d54404-ea0f-47bc-8ed9-795ac9eb1114"),
+                            Id = new Guid("e0ea016f-9c7a-4bc9-86e1-8fdae0b334f0"),
                             AvailableForRent = true,
                             Brand = "Ford",
                             Model = "Focus",
