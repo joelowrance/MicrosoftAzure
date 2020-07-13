@@ -10,7 +10,7 @@ namespace CarsIsland.Catalog.API.Core.DependencyInjection
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cars Island API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cars Island Catalog API v1");
                 c.RoutePrefix = string.Empty;
             });
         }

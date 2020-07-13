@@ -1,7 +1,7 @@
 ﻿using CarsIsland.Catalog.API.Core.IntegrationEvents.Events;
-using CarsIsland.Catalog.API.Core.IntegrationEvents.Interfaces;
 using CarsIsland.Catalog.Domain.Model;
 using CarsIsland.Catalog.Infrastructure.Repositories;
+using CarsIsland.Catalog.Infrastructure.Services.Integration.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -12,7 +12,7 @@ namespace CarsIsland.Catalog.API.Core.DependencyInjection
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cars Island API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cars Island Catalog API", Version = "v1" });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);

@@ -1,7 +1,7 @@
 ﻿using CarsIsland.EventBus.Events;
 using System.Threading.Tasks;
 
-namespace CarsIsland.Catalog.API.Core.IntegrationEvents.Interfaces
+namespace CarsIsland.Catalog.Infrastructure.Services.Integration.Interfaces
 {
     public interface ICatalogIntegrationEventService
     {

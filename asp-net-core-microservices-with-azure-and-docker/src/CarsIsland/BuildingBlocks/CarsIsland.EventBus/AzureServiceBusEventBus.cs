@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace CarsIsland.EventBus
 {
-    public class EventBus : IEventBus
+    public class AzureServiceBusEventBus : IEventBus
     {
         private readonly SubscriptionClient _subscriptionClient;
         private readonly IEventBusSubscriptionsManager _subscriptionManager;
         private readonly IServiceBusConnectionManagementService _serviceBusConnectionManagementService;
-        private readonly ILogger<EventBus> _logger;
+        private readonly ILogger<AzureServiceBusEventBus> _logger;
 
-        public EventBus(IServiceBusConnectionManagementService serviceBusConnectionManagementService,
+        public AzureServiceBusEventBus(IServiceBusConnectionManagementService serviceBusConnectionManagementService,
                         IEventBusSubscriptionsManager subscriptionManager,
-                        ILogger<EventBus> logger,
+                        ILogger<AzureServiceBusEventBus> logger,
                         string subscriptionClientName)
         {
             _serviceBusConnectionManagementService = serviceBusConnectionManagementService;

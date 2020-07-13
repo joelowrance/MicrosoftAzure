@@ -1,5 +1,5 @@
-﻿using CarsIsland.Catalog.API.Core.IntegrationEvents.Interfaces;
-using CarsIsland.Catalog.Infrastructure.Repositories;
+﻿using CarsIsland.Catalog.Infrastructure.Repositories;
+using CarsIsland.Catalog.Infrastructure.Services.Integration.Interfaces;
 using CarsIsland.EventBus.Events;
 using CarsIsland.EventBus.Events.Interfaces;
 using CarsIsland.EventLog;
@@ -10,9 +10,9 @@ using System;
 using System.Data.Common;
 using System.Threading.Tasks;
 
-namespace CarsIsland.Catalog.API.Core.IntegrationEvents
+namespace CarsIsland.Catalog.Infrastructure.Services.Integration
 {
-    internal class CatalogIntegrationEventService : ICatalogIntegrationEventService
+    public class CatalogIntegrationEventService : ICatalogIntegrationEventService
     {
         private readonly CarCatalogDbContext _carCatalogDbContext;
         private readonly IEventBus _eventBus;

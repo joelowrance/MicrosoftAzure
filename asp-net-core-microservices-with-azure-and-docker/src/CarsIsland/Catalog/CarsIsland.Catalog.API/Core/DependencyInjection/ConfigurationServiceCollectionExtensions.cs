@@ -15,6 +15,11 @@ namespace CarsIsland.Catalog.API.Core.DependencyInjection
             var sqlDbDataServiceConfiguration = services.BuildServiceProvider().GetRequiredService<IOptions<SqlDbDataServiceConfiguration>>().Value;
             services.AddSingleton<ISqlDbDataServiceConfiguration>(sqlDbDataServiceConfiguration);
 
+            services.Configure<AzureServiceBusConfiguration>(config.GetSection("AzureServiceBusSettings"));
+            services.AddSingleton<IValidateOptions<AzureServiceBusConfiguration>, AzureServiceBusConfigurationValidation>();
+            var azureServiceBusConfiguration = services.BuildServiceProvider().GetRequiredService<IOptions<AzureServiceBusConfiguration>>().Value;
+            services.AddSingleton<IAzureServiceBusConfiguration>(azureServiceBusConfiguration);
+
             return services;
         }
     }
