@@ -2,6 +2,7 @@
 using CarsIsland.EventBus.Events.Interfaces;
 using CarsIsland.EventBus.Services.Interfaces;
 using Microsoft.Azure.ServiceBus;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -15,10 +16,12 @@ namespace CarsIsland.EventBus
         private readonly SubscriptionClient _subscriptionClient;
         private readonly IEventBusSubscriptionsManager _subscriptionManager;
         private readonly IServiceBusConnectionManagementService _serviceBusConnectionManagementService;
+        private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<AzureServiceBusEventBus> _logger;
 
         public AzureServiceBusEventBus(IServiceBusConnectionManagementService serviceBusConnectionManagementService,
                         IEventBusSubscriptionsManager subscriptionManager,
+                        IServiceProvider serviceProvider,
                         ILogger<AzureServiceBusEventBus> logger,
                         string subscriptionClientName)
         {
@@ -26,6 +29,7 @@ namespace CarsIsland.EventBus
             _subscriptionManager = subscriptionManager;
             _subscriptionClient = _subscriptionClient = new SubscriptionClient(_serviceBusConnectionManagementService.ServiceBusConnectionStringBuilder,
                 subscriptionClientName);
+            _serviceProvider = serviceProvider;
             _logger = logger;
         }
 
@@ -34,7 +38,6 @@ namespace CarsIsland.EventBus
             try
             {
                 await RemoveDefaultRuleAsync();
-                await _subscriptionClient.RemoveRuleAsync(RuleDescription.DefaultRuleName);
                 RegisterSubscriptionClientMessageHandler();
             }
 
@@ -138,11 +141,18 @@ namespace CarsIsland.EventBus
             var processed = false;
             if (_subscriptionManager.HasSubscriptionsForEvent(eventName))
             {
-                var eventType = _subscriptionManager.GetEventTypeByName(eventName);
-                var integrationEvent = JsonConvert.DeserializeObject(message, eventType);
-                var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
-                await (Task)concreteType.GetMethod("Handle").Invoke(null, new object[] { integrationEvent });
-                processed = true;
+                var subscriptions = _subscriptionManager.GetHandlersForEvent(eventName);
+                foreach (var subscription in subscriptions)
+                {
+                    var handler = _serviceProvider.GetRequiredService(subscription.HandlerType);
+                    if (handler == null) continue;
+
+                    var eventType = _subscriptionManager.GetEventTypeByName(eventName);
+                    var integrationEvent = JsonConvert.DeserializeObject(message, eventType);
+                    var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
+                    await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { integrationEvent });
+                    processed = true;
+                }
             }
 
             return processed;

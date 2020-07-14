@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BuildingBlocks\CarsIsland.EventBus\CarsIsland.EventBus.csproj" />
     <ProjectReference Include="..\CarsIsland.Reservation.Domain\CarsIsland.Reservation.Domain.csproj" />
     <ProjectReference Include="..\CarsIsland.Reservation.Infrastructure\CarsIsland.Reservation.Infrastructure.csproj" />
   </ItemGroup>

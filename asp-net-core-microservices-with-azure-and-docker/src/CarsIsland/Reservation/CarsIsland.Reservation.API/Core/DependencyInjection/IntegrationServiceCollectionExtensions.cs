@@ -1,19 +1,19 @@
-﻿using CarsIsland.Catalog.Infrastructure.Configuration.Interfaces;
-using CarsIsland.Catalog.Infrastructure.Services.Integration;
-using CarsIsland.Catalog.Infrastructure.Services.Integration.Interfaces;
-using CarsIsland.EventBus;
+﻿using CarsIsland.EventBus;
 using CarsIsland.EventBus.Events.Interfaces;
 using CarsIsland.EventBus.Services;
 using CarsIsland.EventBus.Services.Interfaces;
 using CarsIsland.EventLog.Services;
 using CarsIsland.EventLog.Services.Interfaces;
+using CarsIsland.Reservation.API.Core.IntegrationEvents.EventHandlers;
+using CarsIsland.Reservation.API.Core.IntegrationEvents.Events;
+using CarsIsland.Reservation.Infrastructure.Configuration.Interfaces;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Data.Common;
 
-namespace CarsIsland.Catalog.API.Core.DependencyInjection
+namespace CarsIsland.Reservation.API.Core.DependencyInjection
 {
     public static class IntegrationServiceCollectionExtensions
     {
@@ -23,7 +23,7 @@ namespace CarsIsland.Catalog.API.Core.DependencyInjection
             var azureServiceBusConfiguration = serviceProvider.GetRequiredService<IAzureServiceBusConfiguration>();
 
             services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
-            services.AddTransient<ICatalogIntegrationEventService, CatalogIntegrationEventService>();
+            services.AddTransient<IIntegrationEventHandler<CarPricePerDayChangedIntegrationEvent>, CarPricePerDayChangedIntegrationEventHandler>();
 
             services.AddSingleton<IServiceBusConnectionManagementService>(sp =>
             {
@@ -40,13 +40,20 @@ namespace CarsIsland.Catalog.API.Core.DependencyInjection
 
                 var eventBus = new AzureServiceBusEventBus(serviceBusConnectionManagementService, eventBusSubcriptionsManager,
                     serviceProvider, logger, azureServiceBusConfiguration.SubscriptionClientName);
-                eventBus.SetupAsync().GetAwaiter().GetResult();
-
                 return eventBus;
             });
 
+
             services.AddTransient<Func<DbConnection, IEventLogService>>(
                     sp => (DbConnection connection) => new EventLogService(connection));
+
+            serviceProvider = services.BuildServiceProvider();
+
+            var eventBus = serviceProvider.GetRequiredService<IEventBus>();
+            eventBus.SetupAsync().GetAwaiter().GetResult();
+            eventBus.SubscribeAsync<CarPricePerDayChangedIntegrationEvent,
+                                    IIntegrationEventHandler<CarPricePerDayChangedIntegrationEvent>>()
+                                    .GetAwaiter().GetResult();
 
             return services;
         }
