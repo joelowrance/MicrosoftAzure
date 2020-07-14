@@ -11,11 +11,11 @@ namespace CarsIsland.Reservation.API.Core.IntegrationEvents.Events
 
         public decimal OldPricePerDay { get; private set; }
 
-        public CarPricePerDayChangedIntegrationEvent(Guid carId, decimal newPrice, decimal oldPrice)
+        public CarPricePerDayChangedIntegrationEvent(Guid carId, decimal newPricePerDay, decimal oldPricePerDay)
         {
             CarId = carId;
-            NewPricePerDay = newPrice;
-            OldPricePerDay = oldPrice;
+            NewPricePerDay = newPricePerDay;
+            OldPricePerDay = oldPricePerDay;
         }
     }
 }

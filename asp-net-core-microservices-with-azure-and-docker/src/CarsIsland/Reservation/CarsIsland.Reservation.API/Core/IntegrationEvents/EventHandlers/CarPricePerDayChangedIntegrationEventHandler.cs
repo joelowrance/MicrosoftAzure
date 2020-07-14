@@ -20,7 +20,7 @@ namespace CarsIsland.Reservation.API.Core.IntegrationEvents.EventHandlers
             _reservationRepository = reservationRepository ?? throw new ArgumentNullException(nameof(reservationRepository));
         }
 
-        public async Task Handle(CarPricePerDayChangedIntegrationEvent @event)
+        public async Task HandleAsync(CarPricePerDayChangedIntegrationEvent @event)
         {
             _logger.LogInformation("Handling integration event: {IntegrationEventId} - ({@IntegrationEvent})", @event.Id, @event);
 

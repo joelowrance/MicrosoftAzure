@@ -19,7 +19,7 @@ namespace CarsIsland.Reservation.API.Core.IntegrationEvents.Events
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task Handle(CarRentalConfirmedAndPaidIntegrationEvent @event)
+        public async Task HandleAsync(CarRentalConfirmedAndPaidIntegrationEvent @event)
         {
             _logger.LogInformation("Handling integration event: {IntegrationEventId} - ({@IntegrationEvent})", @event.Id, @event);
             await _reservationRepository.DeleteReservationAsync(@event.UserId.ToString());
