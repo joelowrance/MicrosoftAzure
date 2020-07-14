@@ -16,12 +16,11 @@ namespace CarsIsland.Reservation.Infrastructure.Repositories
         private readonly IDatabase _database;
 
         public ReservationRepository(ILogger<ReservationRepository> logger,
-                                     ConnectionMultiplexer redis,
-                                     IDatabase database)
+                                     ConnectionMultiplexer redis)
         {
             _logger = logger;
             _redis = redis;
-            _database = database;
+            _database = redis.GetDatabase();
         }
 
         public async Task<bool> DeleteReservationAsync(string id)
