@@ -1,4 +1,5 @@
 ﻿using CarsIsland.Catalog.Infrastructure.Configuration;
+using CarsIsland.Reservation.Infrastructure.Configuration;
 using CarsIsland.Reservation.Infrastructure.Configuration.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,10 +11,10 @@ namespace CarsIsland.Reservation.API.Core.DependencyInjection
     {
         public static IServiceCollection AddAppConfiguration(this IServiceCollection services, IConfiguration config)
         {
-            //services.Configure<RedisConfiguration>(config.GetSection("Redis"));
-            //services.AddSingleton<IValidateOptions<RedisConfiguration>, RedisConfigurationValidation>();
-            //var redisConfiguration = services.BuildServiceProvider().GetRequiredService<IOptions<RedisConfiguration>>().Value;
-            //services.AddSingleton<IRedisConfiguration>(redisConfiguration);
+            services.Configure<RedisConfiguration>(config.GetSection("Redis"));
+            services.AddSingleton<IValidateOptions<RedisConfiguration>, RedisConfigurationValidation>();
+            var redisconfiguration = services.BuildServiceProvider().GetRequiredService<IOptions<RedisConfiguration>>().Value;
+            services.AddSingleton<IRedisConfiguration>(redisconfiguration);
 
             services.Configure<AzureServiceBusConfiguration>(config.GetSection("AzureServiceBusSettings"));
             services.AddSingleton<IValidateOptions<AzureServiceBusConfiguration>, AzureServiceBusConfigurationValidation>();

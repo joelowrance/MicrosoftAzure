@@ -22,8 +22,8 @@ namespace CarsIsland.Reservation.API
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAppConfiguration(Configuration);
-            services.AddIntegrationServices();
             services.AddRedis();
+            services.AddIntegrationServices();
             services.AddControllers();
         }
 

@@ -3,6 +3,7 @@ using CarsIsland.Reservation.Infrastructure.Configuration.Interfaces;
 using CarsIsland.Reservation.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
+using System.Security.Authentication;
 
 namespace CarsIsland.Reservation.API.Core.DependencyInjection
 {
@@ -14,7 +15,7 @@ namespace CarsIsland.Reservation.API.Core.DependencyInjection
             {
                 var redisConfiguration = sp.GetRequiredService<IRedisConfiguration>();
                 var configuration = ConfigurationOptions.Parse(redisConfiguration.ConnectionString, true);
-                configuration.ResolveDns = true;
+                configuration.SslProtocols = SslProtocols.Tls12;
                 return ConnectionMultiplexer.Connect(configuration);
             });
 
