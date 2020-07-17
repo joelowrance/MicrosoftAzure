@@ -49,7 +49,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsIsland.EventLog", "BuildingBlocks\CarsIsland.EventLog\CarsIsland.EventLog.csproj", "{2A99833C-865A-40FC-BCCB-A60E8A23FF15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Payment.API", "Payment\CarsIsland.Payment.API\CarsIsland.Payment.API.csproj", "{691480DF-4110-4207-BC9D-C980F5D24A15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsIsland.Payment.API", "Payment\CarsIsland.Payment.API\CarsIsland.Payment.API.csproj", "{86F6E6CA-7161-474E-AC3E-544002C4D643}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,10 +113,10 @@ Global
 		{2A99833C-865A-40FC-BCCB-A60E8A23FF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A99833C-865A-40FC-BCCB-A60E8A23FF15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A99833C-865A-40FC-BCCB-A60E8A23FF15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{691480DF-4110-4207-BC9D-C980F5D24A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{691480DF-4110-4207-BC9D-C980F5D24A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{691480DF-4110-4207-BC9D-C980F5D24A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{691480DF-4110-4207-BC9D-C980F5D24A15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F6E6CA-7161-474E-AC3E-544002C4D643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F6E6CA-7161-474E-AC3E-544002C4D643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F6E6CA-7161-474E-AC3E-544002C4D643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F6E6CA-7161-474E-AC3E-544002C4D643}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,7 +139,7 @@ Global
 		{CBAE5A85-457A-42AB-BFF9-7F4DCA230BB7} = {35CCC17F-9116-4F05-B915-954FE3EFCFFC}
 		{DBD58192-815F-498A-BE9D-8EA775186E5C} = {BC3597C9-DE56-4F38-8E20-66B334510A01}
 		{2A99833C-865A-40FC-BCCB-A60E8A23FF15} = {BC3597C9-DE56-4F38-8E20-66B334510A01}
-		{691480DF-4110-4207-BC9D-C980F5D24A15} = {7E7BBE03-DB94-46D8-9C27-0E6EBCEE09AB}
+		{86F6E6CA-7161-474E-AC3E-544002C4D643} = {7E7BBE03-DB94-46D8-9C27-0E6EBCEE09AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9A4F78E-6863-4AAD-BB75-30F2F16E1BED}
